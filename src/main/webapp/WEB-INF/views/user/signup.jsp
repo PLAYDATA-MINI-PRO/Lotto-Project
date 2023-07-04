@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-
+<form method="post" action="/user/signup">
+    <input type="email" name="email">
+    <input type="text" name="password">
+    <input type="text" name="name">
+    <input type="submit" value="signup">
+</form>
 </body>
 </html>
