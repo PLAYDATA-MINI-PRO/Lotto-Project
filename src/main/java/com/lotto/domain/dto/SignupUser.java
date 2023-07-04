@@ -1,32 +1,37 @@
-package com.lotto.domain.request;
+package com.lotto.domain.dto;
 
-import com.lotto.domain.dto.SignupUser;
-import com.lotto.domain.dto.User;
-
-public class SignupRequest {
+public class SignupUser {
     private String email;
     private String password;
     private String name;
 
-    public SignupRequest(String email, String password, String name) {
+    public SignupUser(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
-    }
-
-    public SignupUser toDto() {
-        return new SignupUser(email, password, name);
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,5 +1,7 @@
 package com.lotto.controller;
 
+import com.lotto.domain.dto.LoginUser;
+import com.lotto.domain.dto.SignupUser;
 import com.lotto.domain.dto.User;
 import com.lotto.domain.request.LoginRequest;
 import com.lotto.domain.request.SignupRequest;
@@ -23,40 +25,26 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @GetMapping("/signup")
     public String getSignupPage() {return "/user/signup";}
 
-    @GetMapping("/login")
-    public String getLoginPage() {return "/user/login";}
 
     @PostMapping("/signup")
     public ModelAndView signup(
             @ModelAttribute SignupRequest request,
             ModelAndView modelAndView
             ) {
-        if (userService.signup(request)) {
+        SignupUser dto = request.toDto();
+        if (userService.signup(dto)) {
             modelAndView.setViewName("redirect:/user/login");
         } else {
             modelAndView.setViewName("redirect:/user/signup");
         }
-        return modelAndView;
-    }
 
-    @PostMapping("/login")
-    public ModelAndView login(
-            @ModelAttribute LoginRequest request,
-            HttpSession session,
-            ModelAndView modelAndView
-            ) {
-        User login = userService.login(request);
-        if (login != null) {
-            session.setAttribute("email", login.getEmail());
-            session.setAttribute("name", login.getName());
-            modelAndView.setViewName("redirect:/");
-        } else {
-            modelAndView.setViewName("redirect:/user/login");
-        }
+
 
         return modelAndView;
     }
+
 }

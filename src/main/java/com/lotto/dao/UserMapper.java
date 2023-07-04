@@ -1,20 +1,13 @@
 package com.lotto.dao;
 
+import com.lotto.domain.dto.LoginUser;
+import com.lotto.domain.dto.SignupUser;
 import com.lotto.domain.dto.User;
 import com.lotto.domain.request.LoginRequest;
 import com.lotto.domain.request.SignupRequest;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
-public class UserMapper {
-    private final SqlSessionTemplate sessionTemplate;
-
-    public UserMapper(SqlSessionTemplate sessionTemplate) {
-        this.sessionTemplate = sessionTemplate;
-    }
-
-    public int signup(SignupRequest request) { return sessionTemplate.insert("user.signup", request); }
-
-    public User login(LoginRequest request) {return sessionTemplate.selectOne("user.login", request);}
+@Mapper
+public interface UserMapper {
+    int signup(SignupUser signupUser);
 }
