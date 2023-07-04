@@ -29,6 +29,10 @@ public class UserController {
     @GetMapping("/signup")
     public String getSignupPage() {return "/user/signup";}
 
+    @GetMapping("/login")
+    public String getLoginPage() {return  "/user/login";}
+
+
 
     @PostMapping("/signup")
     public ModelAndView signup(
@@ -41,8 +45,27 @@ public class UserController {
         } else {
             modelAndView.setViewName("redirect:/user/signup");
         }
+        return modelAndView;
+    }
 
+    @PostMapping("/login")
+    public ModelAndView login(
+            @ModelAttribute LoginRequest request,
+            ModelAndView modelAndView,
+            HttpSession session
+    ) {
+        LoginUser dto = request.toDto();
+        User login = userService.login(dto);
 
+        if (login != null) {
+            session.setAttribute("email", login.getEmail());
+            session.setAttribute("name", login.getName());
+            System.out.println("login = " + login);
+            modelAndView.setViewName("redirect:/");
+        } else {
+            System.out.println("login = " + login);
+            modelAndView.setViewName("redirect:/user/login");
+        }
 
         return modelAndView;
     }

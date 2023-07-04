@@ -10,6 +10,9 @@ public class User {
     private int money;
     private Timestamp createAt;
 
+    public User() {
+
+    }
     public User(Integer id, String email, String name, String password, int money, Timestamp createAt) {
         this.id = id;
         this.email = email;

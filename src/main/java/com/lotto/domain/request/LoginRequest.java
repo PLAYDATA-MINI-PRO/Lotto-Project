@@ -15,10 +15,6 @@ public class LoginRequest {
         return new LoginUser(email, password);
     }
 
-    public LoginRequest() {
-
-    }
-
     public String getEmail() {
         return email;
     }
