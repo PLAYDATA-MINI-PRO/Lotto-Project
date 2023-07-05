@@ -11,6 +11,9 @@
         select * from user where email = #{email} and password = #{password}
     </select>
     <update id="update">
-        update user set password = #{password}, name = #{name} where id = #{id};
+        update user set password = #{password}, name = #{name} where id = #{id}
+    </update>
+    <update id="delete">
+        delete from user where email = #{email}
     </update>
 </mapper>

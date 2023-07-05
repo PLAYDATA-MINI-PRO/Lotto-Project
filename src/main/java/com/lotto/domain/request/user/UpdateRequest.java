@@ -1,4 +1,4 @@
-package com.lotto.domain.request;
+package com.lotto.domain.request.user;
 
 import com.lotto.domain.dto.UpdateUser;
 

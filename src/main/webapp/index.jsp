@@ -9,5 +9,6 @@
 <% } else { %>
 <a href="/user/update">정보 수정</a>
 <a href="/user/logout">로그아웃</a>
+<a href="/user/delete">회원 탈퇴</a>
 <% } %>
 </html>

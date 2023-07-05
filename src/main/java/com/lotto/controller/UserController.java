@@ -4,16 +4,15 @@ import com.lotto.domain.dto.LoginUser;
 import com.lotto.domain.dto.SignupUser;
 import com.lotto.domain.dto.UpdateUser;
 import com.lotto.domain.dto.User;
-import com.lotto.domain.request.LoginRequest;
-import com.lotto.domain.request.SignupRequest;
-import com.lotto.domain.request.UpdateRequest;
+import com.lotto.domain.request.user.LoginRequest;
+import com.lotto.domain.request.user.SignupRequest;
+import com.lotto.domain.request.user.UpdateRequest;
 import com.lotto.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -75,6 +74,20 @@ public class UserController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("/delete")
+    public String delete(HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        System.out.println("email = " + email);
+        if (email != null) {
+            userService.delete(email);
+            session.invalidate();
+        }
+
+        return "redirect:/";
+    }
+
+
 
     @GetMapping("/update")
     public ModelAndView getUpdatePage(

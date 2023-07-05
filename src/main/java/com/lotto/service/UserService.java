@@ -24,4 +24,6 @@ public class UserService {
     public User login(LoginUser loginUser) { return userMapper.login(loginUser);}
 
     public int update(UpdateUser updateUser) {return userMapper.update(updateUser);}
+
+    public int delete(String email) {return userMapper.delete(email);}
 }

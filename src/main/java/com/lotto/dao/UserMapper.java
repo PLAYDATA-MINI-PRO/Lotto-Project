@@ -13,4 +13,5 @@ public interface UserMapper {
     int signup(SignupUser signupUser);
     User login(LoginUser loginUser);
     int update(UpdateUser updateUser);
+    int delete(String email);
 }
