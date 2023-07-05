@@ -62,7 +62,6 @@ public class UserController {
             System.out.println("login = " + login);
             modelAndView.setViewName("redirect:/");
         } else {
-            System.out.println("login = " + login);
             modelAndView.setViewName("redirect:/user/login");
         }
 
@@ -71,7 +70,10 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate();
+        Integer uid = (Integer) session.getAttribute("id");
+        if (uid != null) {
+            session.invalidate();
+        }
         return "redirect:/";
     }
 
@@ -114,7 +116,6 @@ public class UserController {
         if (uid != null) {
             userService.update(dto);
         } else {
-            System.out.println("uid = " + uid);
         }
         return mav;
     }

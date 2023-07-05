@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserMapper {
     int signup(SignupUser signupUser);
     User login(LoginUser loginUser);
+    int logout(Integer uid);
     int update(UpdateUser updateUser);
     int delete(String email);
 }

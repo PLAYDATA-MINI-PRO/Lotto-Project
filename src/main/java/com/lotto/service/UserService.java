@@ -22,6 +22,7 @@ public class UserService {
         return userMapper.signup(signupUser) != 0;
     }
     public User login(LoginUser loginUser) { return userMapper.login(loginUser);}
+    public int logout(Integer uid){return userMapper.logout(uid);}
 
     public int update(UpdateUser updateUser) {return userMapper.update(updateUser);}
 
