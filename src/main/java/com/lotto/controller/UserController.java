@@ -2,18 +2,18 @@ package com.lotto.controller;
 
 import com.lotto.domain.dto.LoginUser;
 import com.lotto.domain.dto.SignupUser;
+import com.lotto.domain.dto.UpdateUser;
 import com.lotto.domain.dto.User;
 import com.lotto.domain.request.LoginRequest;
 import com.lotto.domain.request.SignupRequest;
+import com.lotto.domain.request.UpdateRequest;
 import com.lotto.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -29,20 +29,11 @@ public class UserController {
     @GetMapping("/signup")
     public String getSignupPage() {return "/user/signup";}
 
-    @GetMapping("/login")
-    public String getLoginPage() {return  "/user/login";}
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/";
-    }
-
     @PostMapping("/signup")
     public ModelAndView signup(
             @ModelAttribute SignupRequest request,
             ModelAndView modelAndView
-            ) {
+    ) {
         SignupUser dto = request.toDto();
         if (userService.signup(dto)) {
             modelAndView.setViewName("redirect:/user/login");
@@ -51,6 +42,9 @@ public class UserController {
         }
         return modelAndView;
     }
+
+    @GetMapping("/login")
+    public String getLoginPage() {return  "/user/login";}
 
     @PostMapping("/login")
     public ModelAndView login(
@@ -63,6 +57,7 @@ public class UserController {
         User login = userService.login(dto);
 
         if (login != null) {
+            session.setAttribute("id", login.getId());
             session.setAttribute("email", login.getEmail());
             session.setAttribute("name", login.getName());
             System.out.println("login = " + login);
@@ -75,5 +70,39 @@ public class UserController {
         return modelAndView;
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 
+    @GetMapping("/update")
+    public ModelAndView getUpdatePage(
+            HttpSession session,
+            ModelAndView mav
+    ) {
+        mav.setViewName("/user/update");
+        Integer uid = (Integer) session.getAttribute("id");
+
+        return mav;
+    }
+
+    @PostMapping("/update")
+    public ModelAndView update(
+            @ModelAttribute UpdateRequest request,
+            HttpSession session,
+            ModelAndView mav
+            ) {
+        mav.setViewName("redirect:/");
+
+        Integer uid = (Integer) session.getAttribute("id");
+        UpdateUser dto = request.toDto(uid);
+
+        if (uid != null) {
+            userService.update(dto);
+        } else {
+            System.out.println("uid = " + uid);
+        }
+        return mav;
+    }
 }

@@ -3,8 +3,11 @@ package com.lotto.service;
 import com.lotto.dao.UserMapper;
 import com.lotto.domain.dto.LoginUser;
 import com.lotto.domain.dto.SignupUser;
+import com.lotto.domain.dto.UpdateUser;
 import com.lotto.domain.dto.User;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,4 +23,5 @@ public class UserService {
     }
     public User login(LoginUser loginUser) { return userMapper.login(loginUser);}
 
+    public int update(UpdateUser updateUser) {return userMapper.update(updateUser);}
 }

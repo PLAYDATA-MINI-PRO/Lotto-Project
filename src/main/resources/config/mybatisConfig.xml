@@ -6,5 +6,4 @@
     <typeAliases>
         <typeAlias type="com.lotto.domain.dto.User" alias="User" />
     </typeAliases>
-
 </configuration>
