@@ -6,7 +6,5 @@
     <typeAliases>
         <typeAlias type="com.lotto.domain.dto.WinnerNumber"
                    alias="WinnerNumber" />
-        <typeAlias type="com.lotto.domain.dto.WinnerNumber"
-                   alias="WinnerNumber" />
     </typeAliases>
 </configuration>
