@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class WinningService {
+public class WinningNumberService {
     private final WinningNumberMapper winningNumberMapper;
 
-    public WinningService(WinningNumberMapper winningNumberMapper) {
+    public WinningNumberService(WinningNumberMapper winningNumberMapper) {
         this.winningNumberMapper = winningNumberMapper;
     }
 

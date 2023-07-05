@@ -1,5 +1,5 @@
 package com.lotto.controller;
-import com.lotto.service.WinningService;
+import com.lotto.service.WinningNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
-    private final WinningService winningService;
+public class WinningNumberController {
+    private final WinningNumberService winningService;
 
-    public UserController(WinningService winningService) {
+    public WinningNumberController(WinningNumberService winningService) {
         this.winningService = winningService;
     }
 
     @GetMapping("/winningnumber")
     public String showLottoPage() {
-        return "/user/winningnumber";
+        return "/lotto/winningnumber";
     }
 
     @PostMapping("/winningnumber")

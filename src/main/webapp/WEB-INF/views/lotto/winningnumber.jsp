@@ -96,13 +96,6 @@
     <input type="text" id="drawDate" name="drawDate" placeholder="회차수">
     <input type="submit" value="조회">
   </form>
-  <a href="/user/winningnumber">로또당첨조회</a>
-
-  <div class="result">
-    <h2>당첨 결과</h2>
-    <p>등수: ${rank}</p>
-  </div>
-
 </div>
 </body>
 </html>

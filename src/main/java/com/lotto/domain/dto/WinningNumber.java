@@ -2,7 +2,7 @@ package com.lotto.domain.dto;
 
 import java.sql.Timestamp;
 
-public class WinnerNumber {
+public class WinningNumber {
 
 private int id;
 private String email;
@@ -12,7 +12,7 @@ private int money;
 private Timestamp create_at;
 
 
-    public WinnerNumber(int id, String email, String name, String password, int money, Timestamp create_at) {
+    public WinningNumber(int id, String email, String name, String password, int money, Timestamp create_at) {
         this.id = id;
         this.email = email;
         this.name = name;
