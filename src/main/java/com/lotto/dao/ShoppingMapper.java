@@ -11,4 +11,7 @@ import java.util.List;
 public interface ShoppingMapper {
     int lottoShopping(Shopping shopping);
     List<Main> shoppingList(String email);
+    List<Main> buyList(String email);
+    String latestDrawDate();
+
 }

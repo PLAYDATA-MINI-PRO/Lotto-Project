@@ -29,8 +29,12 @@ public class MainController {
     ) {
 //        String email = (String) session.getAttribute("email");
         String email = "bbb";
-        List<Main> shoopingList = mainService.shoppingList(email);
-        mav.addObject("shoopingList", shoopingList);
+        List<Main> shoppingList = mainService.shoppingList(email); //  장바구니 리스트
+        List<Main> buyList = mainService.buyList(email);  // 구매한 리스트
+        String drawDate = mainService.drawDate(); // 최신회차 받아옴
+        mav.addObject("shoppingList", shoppingList);
+        mav.addObject("buyList", buyList);
+        mav.addObject("drawDate", drawDate);
         mav.setViewName("/main");
         return mav;
     }

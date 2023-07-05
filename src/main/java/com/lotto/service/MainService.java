@@ -14,7 +14,6 @@ public class MainService    {
     @Autowired
     private ShoppingMapper shoppingMapper;
 
-
     public int shopping(Shopping shopping) {
         return shoppingMapper.lottoShopping(shopping);
     }
@@ -22,4 +21,10 @@ public class MainService    {
     public List<Main> shoppingList(String email){
         return shoppingMapper.shoppingList(email);
     }
+    public List<Main> buyList(String email){
+        return shoppingMapper.buyList(email);
+    }
+    public String drawDate(){
+        return shoppingMapper.latestDrawDate();
+    };
 }

@@ -13,4 +13,15 @@
         from lottoNumber
         where email = #{email} and status = 0
     </select>
+    <select id="buyList" resultType="Main">
+        select
+        *
+        from lottoNumber
+        where email = #{email} and status = 1
+    </select>
+    <select id="latestDrawDate" resultType="String">
+        select
+        draw_date
+        from winningNumber order by draw_date desc limit 1;
+    </select>
 </mapper>

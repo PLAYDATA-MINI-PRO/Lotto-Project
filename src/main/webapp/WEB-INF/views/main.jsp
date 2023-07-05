@@ -92,7 +92,7 @@
     </table>
 
     <form action="/main" method="post" onsubmit="return validateForm()">
-        <input type="text" readonly name="drawDate" value="1">회차
+        <input type="text" readonly name="drawDate" value="${drawDate}">회차
         <input type="text" readonly id="lottoNumberInput" name="lottoNumber" placeholder="로또 번호 입력">
         <input type="button" onclick="lottoNumberAuto()" value="자동">
         <input type="button" onclick="lottoNumberClear()" value="삭제">
@@ -105,20 +105,41 @@
             <td>회차</td>
             <td>로또번호</td>
         </tr>
-        <c:forEach items="${shoopingList}" var="shopping">
+        <c:forEach items="${shoppingList}" var="shopping">
         <tr>
-            <td>${shopping.drawDate}</td>회차
+            <td>${shopping.drawDate}</td>
             <td>${shopping.lottoNumbers}</td>
         </tr>
         </c:forEach>
         <tr>
             <td>
-                <form>
+                <form method="" action="구매페이지">
                     <input type="submit" value="구매">
                 </form>
             </td>
         </tr>
     </table>
     <br><br><br><br>
+    <table>
+        구매내역
+        <tr>
+            <td>회차</td>
+            <td>로또번호</td>
+            <td>당첨조회</td>
+        </tr>
+        <c:forEach items="${buyList}" var="buy">
+            <form method="" action="당첨확인페이지">
+                <tr>
+                    <td>${buy.drawDate}</td>
+                    <td>${buy.lottoNumbers}</td>
+                    <td>
+                        <input type="hidden" value="${buy.drawDate}">
+                        <input type="hidden" value="${buy.lottoNumbers}">
+                        <input type="submit" value="조회">
+                    </td>
+                </tr>
+            </form>
+        </c:forEach>
+    </table>
 </body>
 </html>
