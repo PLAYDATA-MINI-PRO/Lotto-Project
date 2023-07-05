@@ -4,9 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.lotto.domain.entity.TodoJoinUser"
-                   alias="TodoJoinUser" />
-        <typeAlias type="com.lotto.domain.entity.User"
-                   alias="User" />
+        <typeAlias type="com.lotto.domain.dto.Main"
+                   alias="Main" />
     </typeAliases>
 </configuration>
