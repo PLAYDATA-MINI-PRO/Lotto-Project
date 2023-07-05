@@ -32,7 +32,11 @@ public class UserController {
     @GetMapping("/login")
     public String getLoginPage() {return  "/user/login";}
 
-
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 
     @PostMapping("/signup")
     public ModelAndView signup(
@@ -54,6 +58,7 @@ public class UserController {
             ModelAndView modelAndView,
             HttpSession session
     ) {
+
         LoginUser dto = request.toDto();
         User login = userService.login(dto);
 
@@ -69,5 +74,6 @@ public class UserController {
 
         return modelAndView;
     }
+
 
 }
