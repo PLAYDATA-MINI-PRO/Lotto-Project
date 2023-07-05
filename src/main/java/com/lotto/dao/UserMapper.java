@@ -1,9 +1,6 @@
 package com.lotto.dao;
 
-import com.lotto.domain.dto.LoginUser;
-import com.lotto.domain.dto.SignupUser;
-import com.lotto.domain.dto.UpdateUser;
-import com.lotto.domain.dto.User;
+import com.lotto.domain.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +23,6 @@ public interface UserMapper {
 
     // 회원 탈퇴 메서드: email 주소를 인자로 받아 해당 이메일을 가진 사용자를 삭제
     int delete(String email);
+
+    int outUserSave(String email);
 }

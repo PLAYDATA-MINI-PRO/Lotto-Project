@@ -1,9 +1,6 @@
 package com.lotto.controller;
 
-import com.lotto.domain.dto.LoginUser;
-import com.lotto.domain.dto.SignupUser;
-import com.lotto.domain.dto.UpdateUser;
-import com.lotto.domain.dto.User;
+import com.lotto.domain.dto.*;
 import com.lotto.domain.request.user.LoginRequest;
 import com.lotto.domain.request.user.SignupRequest;
 import com.lotto.domain.request.user.UpdateRequest;
@@ -30,7 +27,9 @@ public class UserController {
 
     // 회원가입 페이지 반환 메서드
     @GetMapping("/signup")
-    public String getSignupPage() {return "/user/signup";}
+    public String getSignupPage() {
+        return "/user/signup";
+    }
 
     // 회원가입을 처리하는 메서드
     @PostMapping("/signup")
@@ -56,7 +55,9 @@ public class UserController {
 
     // 로그인 페이지를 반환하는 메서드
     @GetMapping("/login")
-    public String getLoginPage() {return  "/user/login";}
+    public String getLoginPage() {
+        return "/user/login";
+    }
 
     // 로그인 처리를 하는 메서드
     @PostMapping("/login")
@@ -110,23 +111,26 @@ public class UserController {
         return "redirect:/";
     }
 
-    // 회원 탈퇴를 처리하는 메서드
+    //     회원 탈퇴를 처리하는 메서드
     @GetMapping("/delete")
-    public String delete(HttpSession session) {
-
-        // 세션에서 사용자 email 을 가져와 email에 저장
+    public ModelAndView outUserSave(
+            ModelAndView mav,
+            HttpSession session
+    ) {
+        // 세션에서 사용자 email 을 가져와 email 에 저장
         String email = (String) session.getAttribute("email");
 
-        // email이 존재하면,
-        // userService.delete(dto)를 호출하여 회원가입 처리 및 세션 무효화
-        if (email != null) {
-            userService.delete(email);
-            session.invalidate();
-        }
+        // userService.outUserSave(email)를 호출하여 탈퇴 회원 데이터베이스에 저장
+        userService.outUserSave(email);
 
-        return "redirect:/";
+        // userService.delete(email)를 호출하여 회원가입 처리 및 세션 무효화
+        userService.delete(email);
+        session.invalidate();
+
+
+        mav.setViewName("redirect:/");
+        return mav;
     }
-
 
 
     // 유저 정보 수정 페이지 반환 메서드
@@ -146,7 +150,7 @@ public class UserController {
             @ModelAttribute UpdateRequest request,
             HttpSession session,
             ModelAndView mav
-            ) {
+    ) {
 
 
         // 세션에서 사용자 ID(uid) 을 가져와 uid에 저장
@@ -169,4 +173,5 @@ public class UserController {
         mav.setViewName("redirect:/");
         return mav;
     }
+
 }
