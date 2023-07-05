@@ -3,10 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotto.dao.BuyMapper">
-    <update id="updateMoney" parameterType="com.lotto.domain.request.BuyRequest">
-        update user
-        set money = money - #{money},
-        status = true
-        where email = #{email}
+    <update id="updateUserMoney">
+        UPDATE user
+        SET money = money - #{MONEY}
+        WHERE email = #{email}
     </update>
+
+    <update id="updateLottoStatus">
+        UPDATE lottonumber
+        SET status = true
+        WHERE email = #{email} and lotto_numbers = #{lottoNumbers}
+    </update>
+
+    <select id="findByEmail" resultType="LottoNumber">
+        select *
+        from lottonumber
+        where email = #{email}
+    </select>
 </mapper>

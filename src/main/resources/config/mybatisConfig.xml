@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="com.lotto.domain.request.BuyRequest"
-                   alias="Buy" />
+        <typeAlias type="com.lotto.domain.dto.LottoNumber"
+                   alias="LottoNumber" />
     </typeAliases>
 </configuration>
