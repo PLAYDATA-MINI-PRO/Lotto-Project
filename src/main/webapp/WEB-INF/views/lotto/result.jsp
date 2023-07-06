@@ -44,6 +44,7 @@
             margin: 0;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         .result li {
@@ -79,17 +80,16 @@
 <div class="container">
     <h1>로또 당첨 결과</h1>
     <div class="result">
-        <h2>이번 회차: ${drawDate} 회차 (${winningNumbers.draw_date})</h2>
+        <h2>이번 회차: ${drawDate} 회차</h2>
         <ul>
-            <c:forEach items="${winningNumbers.winning_numbers}" var="number">
-                <li>${number}</li>
-            </c:forEach>
+            <li>당첨 번호: ${winningNumbers}</li>
         </ul>
-        <c:forEach items="${resultNumber.resultNumber}" var="number">
-            <p>고객 번호: <span class="your-number">${lottoNumber} </span></p>
-        </c:forEach>
-        <p>일치 번호: <span class="your-number">${ranking} </span></p>
-        <a href="${pageContext.request.contextPath}/lotto/result">다른 번호 조회하기</a>
+        <br>
+        <p>고객 번호: <span class="your-number">${takeLottoNumber}</span></p>
+        <br>
+        <p>일치 번호: <span class="your-number">${commonNumbers}</span></p>
+        <br>
+        <p>등수: <span class="your-number">${rank}</span></p>
     </div>
 </div>
 </body>
