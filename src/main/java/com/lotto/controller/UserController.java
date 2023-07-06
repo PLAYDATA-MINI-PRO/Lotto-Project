@@ -90,7 +90,7 @@ public class UserController {
                 modelAndView.setViewName("redirect:/admin/main");
             } else {
                 // 메인 페이지로 리다이렉트
-                modelAndView.setViewName("redirect:/");
+                modelAndView.setViewName("redirect:/main");
             }
 
             // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
