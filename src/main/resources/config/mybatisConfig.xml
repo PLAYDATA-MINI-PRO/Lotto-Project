@@ -8,6 +8,7 @@
         <typeAlias type="com.lotto.domain.dto.User" alias="User"/>
         <typeAlias type="com.lotto.domain.dto.OutUser" alias="OutUser"/>
         <typeAlias type="com.lotto.domain.dto.LottoNumber"
-                   alias="LottoNumber" />
+                   alias="LottoNumber"/>
+
     </typeAliases>
 </configuration>
