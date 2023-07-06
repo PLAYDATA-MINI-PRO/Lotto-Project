@@ -2,6 +2,10 @@
 <html>
 <body>
 <h2>Hello World!</h2>
+<%
+    String redirectURL = "/main";
+    response.sendRedirect(redirectURL);
+%>
 </body>
 <% if (session.getAttribute("email") == null) {%>
 <a href="/user/signup">회원가입</a>
