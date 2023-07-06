@@ -1,8 +1,13 @@
 -- DROP DATABASE Lotto;
 CREATE DATABASE Lotto;
 USE Lotto;
-
+-- safe모드 해제 
+SET sql_safe_updates=0;
 show tables;
+select * from user;
+select * from lottonumber;
+
+
 SHOW FULL COLUMNS FROM user;
 
 CREATE TABLE user (
@@ -10,9 +15,12 @@ CREATE TABLE user (
     email VARCHAR(100) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    money INT,
+    money INT default 0,
     create_at DATETIME DEFAULT NOW()
 );
+update user set money=2000 where name="jun";
+select * from user;
+
 INSERT INTO user (email, name, password,money) VALUES ('aaa', 'jun1', '123',1000);
 INSERT INTO user (email, name, password,money) VALUES ('bbb', 'jun2', '123',2000);
 INSERT INTO user (email, name, password,money) VALUES ('ccc', 'jun3', '123',3000);
@@ -34,12 +42,13 @@ CREATE TABLE lottoNumber (
     FOREIGN KEY (email) REFERENCES user(email),
     FOREIGN KEY (draw_date) REFERENCES winningNumber(draw_date)
 );
-select * from lottoNumber;
+select * from lottoNumber where status=1;
+-- delete from lottoNumber where status=1;
 INSERT INTO user (email, name, password,money) VALUES ('aaa', 'jun1', '123',1000);
 INSERT INTO winningNumber (draw_date, winning_numbers) VALUES (1, '1,2,3,4,5,6');
 
 INSERT INTO lottoNumber (email, lotto_numbers, draw_date) VALUES ('aaa', '1,2,3,4,5,6', '1');
--- INSERT INTO lottoNumber (email, lotto_numbers, draw_date,status) VALUES ('bbb', '8,2,3,4,5,6', '3','1');
+-- INSERT INTO lottoNumber (email, lotto_numbers, draw_date,status) VALUES ('bbb', '2,4,8,7,10,12', '3','1');
 select * from lottoNumber;
 
 CREATE TABLE userWinningInfo (
