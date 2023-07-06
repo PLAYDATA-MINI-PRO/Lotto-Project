@@ -22,7 +22,7 @@
             <td>
                 <form method="post" action="/lotto/showBuyPage">
                     <input type="hidden" name="lottoNumbers" value="${lotto.lottoNumbers}">
-                    <input type="submit" >
+                    <input type="submit" value="구매" >
                 </form>
             </td>
             </c:if>

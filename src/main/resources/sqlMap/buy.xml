@@ -20,4 +20,16 @@
         from lottonumber
         where email = #{email}
     </select>
+
+    <update id="chargeMoney">
+        UPDATE user
+        SET money = money + #{money}
+        WHERE email = #{email}
+    </update>
+
+    <select id="findMoney" resultType="int">
+        select money
+        from user
+        where email = #{email}
+    </select>
 </mapper>

@@ -1,10 +1,10 @@
 package com.lotto.domain.request;
 
-public class UpdateUserMoneyRequest {
+public class BuyLottoRequest {
     private String email;
     private final int MONEY = 1000;
 
-    public UpdateUserMoneyRequest(String email) {
+    public BuyLottoRequest(String email) {
         this.email = email;
     }
 
