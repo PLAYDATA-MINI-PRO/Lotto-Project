@@ -12,6 +12,7 @@ public interface ShoppingMapper {
     int lottoShopping(Shopping shopping);
     List<Main> shoppingList(String email);
     List<Main> buyList(String email);
+    List<Main> percentList();
     String latestDrawDate();
 
 }

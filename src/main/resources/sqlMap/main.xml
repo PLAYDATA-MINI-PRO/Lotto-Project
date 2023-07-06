@@ -13,6 +13,11 @@
         from lottoNumber
         where email = #{email} and status = 0
     </select>
+    <select id="percentList" resultType="Main">
+        select
+        *
+        from lottoNumber
+    </select>
     <select id="buyList" resultType="Main">
         select
         *

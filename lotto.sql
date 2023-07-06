@@ -13,12 +13,18 @@ CREATE TABLE user (
     money INT,
     create_at DATETIME DEFAULT NOW()
 );
+INSERT INTO user (email, name, password,money) VALUES ('aaa', 'jun1', '123',1000);
+INSERT INTO user (email, name, password,money) VALUES ('bbb', 'jun2', '123',2000);
+INSERT INTO user (email, name, password,money) VALUES ('ccc', 'jun3', '123',3000);
 CREATE TABLE winningNumber (
     id INT PRIMARY KEY AUTO_INCREMENT,
     draw_date INT unique KEY NOT NULL,
     winning_numbers VARCHAR(100) NOT NULL
 );
-
+INSERT INTO winningNumber (draw_date, winning_numbers) VALUES (1, '1,2,3,4,5,6');
+INSERT INTO winningNumber (draw_date, winning_numbers) VALUES (2, '7,8,9,10,11,12');
+INSERT INTO winningNumber (draw_date, winning_numbers) VALUES (3, '13,14,15,16,17,18');
+select * from winningNumber order by draw_date desc limit 1;
 CREATE TABLE lottoNumber (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL,
@@ -28,6 +34,14 @@ CREATE TABLE lottoNumber (
     FOREIGN KEY (email) REFERENCES user(email),
     FOREIGN KEY (draw_date) REFERENCES winningNumber(draw_date)
 );
+select * from lottoNumber;
+INSERT INTO user (email, name, password,money) VALUES ('aaa', 'jun1', '123',1000);
+INSERT INTO winningNumber (draw_date, winning_numbers) VALUES (1, '1,2,3,4,5,6');
+
+INSERT INTO lottoNumber (email, lotto_numbers, draw_date) VALUES ('aaa', '1,2,3,4,5,6', '1');
+-- INSERT INTO lottoNumber (email, lotto_numbers, draw_date,status) VALUES ('bbb', '8,2,3,4,5,6', '3','1');
+select * from lottoNumber;
+
 CREATE TABLE userWinningInfo (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL,

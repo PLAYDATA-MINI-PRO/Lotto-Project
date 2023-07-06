@@ -64,8 +64,32 @@
             return true; // 폼 제출을 허용
         }
     </script>
+    <style>
+        .lotto-number {
+            position: relative;
+        }
+
+        .lotto-number .percentage {
+            display: none;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: lightblue;
+            color: black;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .lotto-number:hover .percentage {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+
+<% double[] percentages = (double[]) request.getAttribute("percentages"); %>
+<p>※ 마우스를 올렸을때 나오는 %는 이용자들의 해당 번호 구매비율입니다.</p>
 <%--로또번호는 1~45까지이고 6개의 번호를 고른다.--%>
     <table>
         <!-- 로또 번호들을 클릭 이벤트로 연결 -->
@@ -78,7 +102,8 @@
                     int num;
                     num = (i*10)+j;  // 숫자 점점 올라가도록
             %>
-            <td onclick="selectLottoNumber(<%=num%>)"><%=num%></td>
+<%--            <td onclick="selectLottoNumber(<%=num%>)"><%=num%> <span><%= percentages[num]%>%</span></td>--%>
+            <td class="lotto-number" onclick="selectLottoNumber(<%=num%>)"><%=num%> <span class="percentage"><%= percentages[num]%>%</span></td>
             <%
                     if(num==45){  // 45까지만 나오도록
                         break;
@@ -91,6 +116,7 @@
         %>
     </table>
 
+
     <form action="/main" method="post" onsubmit="return validateForm()">
         <input type="text" readonly name="drawDate" value="${drawDate}">회차
         <input type="text" readonly id="lottoNumberInput" name="lottoNumber" placeholder="로또 번호 입력">
@@ -98,18 +124,22 @@
         <input type="button" onclick="lottoNumberClear()" value="삭제">
         <input type="submit" value="장바구니" id="cartButton">
     </form>
-    <br><br><br><br>
+    <br><br>
     <table>
         장바구니
         <tr>
+            <td>No.</td>
             <td>회차</td>
             <td>로또번호</td>
         </tr>
+        <% int shoppingNum = 1;%>
         <c:forEach items="${shoppingList}" var="shopping">
         <tr>
+            <td><%=shoppingNum%></td>
             <td>${shopping.drawDate}</td>
             <td>${shopping.lottoNumbers}</td>
         </tr>
+            <% shoppingNum++;%>
         </c:forEach>
         <tr>
             <td>
@@ -119,17 +149,20 @@
             </td>
         </tr>
     </table>
-    <br><br><br><br>
+    <br><br>
     <table>
         구매내역
         <tr>
+            <td>No.</td>
             <td>회차</td>
             <td>로또번호</td>
             <td>당첨조회</td>
         </tr>
+        <% int buyNum = 1;%>
         <c:forEach items="${buyList}" var="buy">
             <form method="" action="당첨확인페이지">
                 <tr>
+                    <td><%out.println(buyNum);%></td>
                     <td>${buy.drawDate}</td>
                     <td>${buy.lottoNumbers}</td>
                     <td>
@@ -139,6 +172,7 @@
                     </td>
                 </tr>
             </form>
+            <% shoppingNum++;%>
         </c:forEach>
     </table>
 </body>

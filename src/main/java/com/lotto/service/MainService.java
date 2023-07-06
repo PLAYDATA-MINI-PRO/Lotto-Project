@@ -21,6 +21,9 @@ public class MainService    {
     public List<Main> shoppingList(String email){
         return shoppingMapper.shoppingList(email);
     }
+    public List<Main> percentList(){
+        return shoppingMapper.percentList();
+    }
     public List<Main> buyList(String email){
         return shoppingMapper.buyList(email);
     }
