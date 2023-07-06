@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -34,18 +35,30 @@
         .result h2 {
             margin-bottom: 20px;
             color: #007bff;
+            font-size: 24px;
         }
 
         .result ul {
             list-style: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            justify-content: center;
         }
 
         .result li {
             display: inline-block;
             margin-right: 10px;
-            font-size: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .your-number {
+            font-size: 20px;
             font-weight: bold;
             background-color: #007bff;
             color: #fff;
@@ -66,13 +79,17 @@
 <div class="container">
     <h1>로또 당첨 결과</h1>
     <div class="result">
-        <h2>추첨 회차: ${drawDate}</h2>
+        <h2>이번 회차: ${drawDate} 회차 (${winningNumbers.draw_date})</h2>
         <ul>
-            <c:forEach items="${winningNumbers}" var="number">
+            <c:forEach items="${winningNumbers.winning_numbers}" var="number">
                 <li>${number}</li>
             </c:forEach>
         </ul>
-        <a href="${pageContext.request.contextPath}/lotto/result">다시 조회하기</a>
+        <c:forEach items="${resultNumber.resultNumber}" var="number">
+            <p>고객 번호: <span class="your-number">${lottoNumber} </span></p>
+        </c:forEach>
+        <p>일치 번호: <span class="your-number">${ranking} </span></p>
+        <a href="${pageContext.request.contextPath}/lotto/result">다른 번호 조회하기</a>
     </div>
 </div>
 </body>

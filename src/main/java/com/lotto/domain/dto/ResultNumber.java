@@ -1,16 +1,13 @@
 package com.lotto.domain.dto;
 
-import java.sql.Timestamp;
-
-public class WinningNumber {
-
+public class ResultNumber {
     private int id;
     private int draw_date;
     private String winning_numbers;
 
 
 
-    public WinningNumber(int id, int draw_date, String winning_numbers) {
+    public ResultNumber(int id, int draw_date, String winning_numbers) {
         this.id = id;
         this.draw_date = draw_date;
         this.winning_numbers = winning_numbers;

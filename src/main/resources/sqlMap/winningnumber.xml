@@ -4,14 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lotto.dao.WinningNumberMapper">
         <!-- 로또 번호 조회 -->
-        <select id="getLottoNumbersByDrawDate" parameterType="java.util.Map" resultType="WinningNumber">
-                SELECT * FROM lottoNumber WHERE draw_date = #{drawDate}
+        <select id="findByDraw" resultType="WinningNumber" parameterType="int">
+                SELECT * FROM winningnumber WHERE draw_date = #{drawDate}
         </select>
 
-        <!-- 로또 번호 입력 -->
-        <insert id="insertLottoNumbers" parameterType="WinningNumber">
-                INSERT INTO lottoNumber (email, lotto_numbers, draw_date) VALUES (#{email}, #{lotto_numbers}, #{draw_date})
-        </insert>
+        <select id="userLottoNumber" resultType="com.lotto.domain.dto.ResultNumber">
+                SELECT id,draw_date,lotto_numbers FROM lottonumber WHERE email = #{email} and draw_date = #{drawDate}
+        </select>
 
 </mapper>
 

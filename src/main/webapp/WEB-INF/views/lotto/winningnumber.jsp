@@ -91,7 +91,7 @@
 <body>
 <div class="container">
   <h1>로또 번호 조회</h1>
-  <form method="post" action="${pageContext.request.contextPath}/lotto/result">
+  <form method="post" action="/lotto/winningnumber">
     <label for="drawDate">추첨회차:</label>
     <input type="text" id="drawDate" name="drawDate" placeholder="회차수">
     <input type="submit" value="조회">

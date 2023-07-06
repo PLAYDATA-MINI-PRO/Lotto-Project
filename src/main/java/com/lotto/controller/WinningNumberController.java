@@ -1,4 +1,8 @@
 package com.lotto.controller;
+
+import com.lotto.domain.dto.ResultDto;
+import com.lotto.domain.dto.ResultNumber;
+import com.lotto.domain.dto.WinningNumber;
 import com.lotto.service.WinningNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,30 +10,65 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/lotto")
 public class WinningNumberController {
-    private final WinningNumberService winningService;
 
-    public WinningNumberController(WinningNumberService winningService) {
-        this.winningService = winningService;
+    private final WinningNumberService winningNumberService;
+
+    public WinningNumberController(WinningNumberService winningNumberService) {
+        this.winningNumberService = winningNumberService;
     }
 
     @GetMapping("/winningnumber")
-    public String showLottoPage() {
+    public String getWinningNumberPage() {
         return "/lotto/winningnumber";
     }
 
+
+
     @PostMapping("/winningnumber")
-    public String checkLottoNumber(@RequestParam("lottoNumber") String lottoNumber, Model model) {
-        // 로또 번호 체크 로직 수행
-        int drawDate = 123; // 예시로 임의의 추첨 회차를 사용
-        int rank = winningService.calculateRank(lottoNumber, drawDate);
+    public ModelAndView postResultPage(ModelAndView mav, @RequestParam("drawDate") int drawDate) {
+        mav.setViewName("redirect:/lotto/result");
+        mav.addObject("drawDate", drawDate);
+        return mav;
+    }
+    @GetMapping("/result")
+    public String getResultPage(Model model, @RequestParam("drawDate") int drawDate) {
 
-        model.addAttribute("lottoNumber", lottoNumber);
-        model.addAttribute("rank", rank);
+        WinningNumber winningNumbers = winningNumberService.findByDraw(drawDate);
+        String email = "q1@naver.com";
+        ResultDto resultDto = new ResultDto(email, drawDate);
 
-        return "/user/winningnumber";
+//        당첨번호
+        List<ResultNumber> resultNumber = winningNumberService.userLottoNumber(resultDto);
+        List<Integer> ranking = winningNumberService.CompareLottoNumbers(winningNumbers.getWinning_numbers(), resultNumber);
+        System.out.println(ranking);
+        model.addAttribute("winningNumbers", winningNumbers);
+        model.addAttribute("lottoNumber", resultNumber);
+        return "/lotto/result";
+    }
+    @PostMapping("/result")
+    public ModelAndView resultFinish(ModelAndView mav, @RequestParam("drawDate") int drawDate) {
+        String email = "q1@naver.com";
+        ResultDto resultDto = new ResultDto(email, drawDate);
+        WinningNumber winningNumbers = winningNumberService.findByDraw(drawDate);
+//        당첨번호
+        List <ResultNumber> resultNumber = winningNumberService.userLottoNumber(resultDto);
+        List<Integer> ranking = winningNumberService.CompareLottoNumbers(winningNumbers.getWinning_numbers(),
+                resultNumber);
+        System.out.println(ranking);
+
+//        테스트용 유저 로또번호
+        mav.addObject("drawDate", drawDate);
+        mav.addObject("winningNumbers", winningNumbers);
+        mav.addObject("lottoNumber", resultNumber);
+
+        mav.setViewName("/lotto/result");
+        return mav;
     }
 }
