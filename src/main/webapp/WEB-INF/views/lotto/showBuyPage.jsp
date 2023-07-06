@@ -61,6 +61,36 @@ To change this template use File | Settings | File Templates.
         .buy-button button {
             margin: 0 auto;
         }
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: 0;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .menu-item {
+            margin-right: 10px;
+        }
+
+        .menu-item:last-child {
+            margin-right: 0;
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            border-bottom-color: #f00;
+        }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -79,6 +109,14 @@ To change this template use File | Settings | File Templates.
     </script>
 </head>
 <body>
+<header>
+    <ul class="menu">
+        <li class="menu-item">이름: <%= session.getAttribute("name") %></li>
+        <li class="menu-item">잔액: <%= session.getAttribute("money") %></li>
+        <li class="menu-item"><a href="/main">메인</a></li>
+        <li class="menu-item"><a href="/user/logout">로그아웃</a></li>
+    </ul>
+</header>
 <div class="container">
     <h1 class="text-center">Lotto List</h1>
     <table class="table">

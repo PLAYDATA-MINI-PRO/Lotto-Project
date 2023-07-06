@@ -6,8 +6,7 @@
 
     <typeAliases>
 
-        <typeAlias type="com.lotto.domain.dto.WinningNumber"
-                   alias="WinningNumber"/>
+
         <!--        com.lotto.domain.dto.User 클래스에 대한 별칭을 User로 지정-->
         <typeAlias type="com.lotto.domain.dto.User" alias="User"/>
         <typeAlias type="com.lotto.domain.dto.OutUser" alias="OutUser"/>

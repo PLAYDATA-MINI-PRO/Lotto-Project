@@ -84,6 +84,9 @@ public class UserController {
             // 로그인한 사용자의 이름을 가져와 세션에 저장 -> 이후에 다른 페이지에서도 사용 가능
             session.setAttribute("name", login.getName());
 
+            // 로그인한 사용자의 잔액을 가져와 세션에 저장 -> 이후에 다른 페이지에서도 사용 가능
+            session.setAttribute("money", login.getMoney());
+
 
             // 로그인 사용자가 admin 이면 admin 페이지로 리다이렉트
             if (login.getEmail().equals("admin@admin.com")) {
@@ -113,7 +116,7 @@ public class UserController {
         if (uid != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return "redirect:/user/login";
     }
 
     //     회원 탈퇴를 처리하는 메서드

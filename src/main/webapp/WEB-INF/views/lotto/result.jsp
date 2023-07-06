@@ -74,9 +74,47 @@
             color: #007bff;
             text-decoration: none;
         }
+        .menu {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: 0;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .menu-item {
+            margin-right: 10px;
+        }
+
+        .menu-item:last-child {
+            margin-right: 0;
+        }
+
+        .menu-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.3s ease;
+        }
+
+        .menu-item a:hover {
+            border-bottom-color: #f00;
+        }
     </style>
 </head>
 <body>
+<header>
+    <ul class="menu">
+        <li class="menu-item">이름: <%= session.getAttribute("name") %></li>
+        <li class="menu-item">잔액: <%= session.getAttribute("money") %></li>
+        <li class="menu-item"><a style="margin-bottom: 18px" href="/main">메인</a></li>
+        <li class="menu-item"><a style="margin-bottom: 18px" href="/user/logout">로그아웃</a></li>
+    </ul>
+</header>
 <div class="container">
     <h1>로또 당첨 결과</h1>
     <div class="result">

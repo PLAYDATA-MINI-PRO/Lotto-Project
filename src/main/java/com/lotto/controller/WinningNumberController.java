@@ -44,9 +44,9 @@ public class WinningNumberController {
     @GetMapping("/result")
     public String getResultPage(Model model,
                                 @RequestParam("drawDate") int drawDate
-//                                ,@RequestParam("takeLottoNumber") String takeLottoNumber
+                                ,@RequestParam("takeLottoNumber") String takeLottoNumber
                                 ) {
-        String takeLottoNumber = "2,3,4,5,6,7";
+//        String takeLottoNumber = "2,3,4,5,6,7";
         String winningNumbers = winningNumberService.findByDraw(drawDate);
 
 
@@ -66,14 +66,18 @@ public class WinningNumberController {
         int count = numberArray.length;
         String rank = null;
         if(count == 6){
-            rank = "1등(식대권)";
+            rank = "1등";
         }else if(count == 5){
-            rank = "2등ㅋ()";
+            rank = "2등";
         }else if(count == 4){
-            rank = "3등ㅋㅋ";
+            rank = "3등";
         }else if(count == 3){
-            rank = "4등ㅋㅋㅋ";
-        }else {
+            rank = "4등";
+        }else if(count == 2){
+            rank = "낙첨되었습니다.";
+        }else if(count == 1){
+            rank = "낙첨되었습니다.";
+        }else if(count == 0){
             rank = "낙첨되었습니다.";
             commonNumbers = "일치되는 번호가 없습니다.";
         }
