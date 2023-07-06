@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lotto.dao.BuyMapper">
+    <update id="updateUserMoney">
+        UPDATE user
+        SET money = money - #{MONEY}
+        WHERE email = #{email}
+    </update>
+
+    <update id="updateLottoStatus">
+        UPDATE lottonumber
+        SET status = true
+        WHERE email = #{email} and lotto_numbers = #{lottoNumbers}
+    </update>
+
+    <select id="findByEmail" resultType="LottoNumber">
+        select *
+        from lottonumber
+        where email = #{email}
+    </select>
+
+    <update id="chargeMoney">
+        UPDATE user
+        SET money = money + #{money}
+        WHERE email = #{email}
+    </update>
+
+    <select id="findMoney" resultType="int">
+        select money
+        from user
+        where email = #{email}
+    </select>
+</mapper>
