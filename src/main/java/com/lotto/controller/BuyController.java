@@ -25,8 +25,7 @@ public class BuyController {
 
     @GetMapping("/lotto/showBuyPage")
     public ModelAndView lottoBuyPage(ModelAndView mav, HttpSession session) {
-        //String userEmail = (String) session.getAttribute("email");
-        String userEmail = "aaa@naver.com";
+        String userEmail = (String) session.getAttribute("email");
         List<LottoNumber> lottoNumbers = buyService.findByEmail(userEmail);
         mav.addObject("lottoList", lottoNumbers);
         mav.setViewName("/lotto/showBuyPage");
@@ -35,10 +34,7 @@ public class BuyController {
 
     @PostMapping("/lotto/showBuyPage")
     public ModelAndView lottoBuy(ModelAndView mav, HttpSession session, @RequestParam String lottoNumbers) {
-//String userEmail = (String) session.getAttribute("email");
-        String userEmail = "aaa@naver.com";
-//        BuyLottoRequest money = new BuyLottoRequest(userEmail);
-//        UpdateLottoStatusRequest status = new UpdateLottoStatusRequest(userEmail,lottoNumbers);
+        String userEmail = (String) session.getAttribute("email");
         UpdateUserMoneyAndStatus updateUserMoneyAndStatus = new UpdateUserMoneyAndStatus(userEmail, lottoNumbers);
         buyService.updateMoneyAndStatus(updateUserMoneyAndStatus);
         List<LottoNumber> lottoNumber = buyService.findByEmail(userEmail);
@@ -49,8 +45,7 @@ public class BuyController {
 
     @GetMapping("/lotto/userChargeMoneyPage")
     public ModelAndView userMoneyPage(ModelAndView mav, HttpSession session) {
-        //String userEmail = (String) session.getAttribute("email");
-        String userEmail = "aaa@naver.com";
+        String userEmail = (String) session.getAttribute("email");
         int money = buyService.findMoney(userEmail);
         mav.addObject("money", money);
         mav.setViewName("/lotto/userChargeMoneyPage");
@@ -59,8 +54,7 @@ public class BuyController {
 
     @PostMapping("/lotto/userChargeMoneyPage")
     public ModelAndView chargeMoney(ModelAndView mav, HttpSession session, @RequestParam("userMoney") int money) {
-        //String userEmail = (String) session.getAttribute("email");
-        String userEmail = "aaa@naver.com";
+        String userEmail = (String) session.getAttribute("email");
         ChargeMoneyRequest chargeMoneyRequest = new ChargeMoneyRequest(userEmail, money);
         buyService.chargeMoney(chargeMoneyRequest);
         int userMoney = buyService.findMoney(userEmail);
