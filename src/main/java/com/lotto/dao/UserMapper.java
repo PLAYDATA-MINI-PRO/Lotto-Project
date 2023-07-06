@@ -24,5 +24,6 @@ public interface UserMapper {
     // 회원 탈퇴 메서드: email 주소를 인자로 받아 해당 이메일을 가진 사용자를 삭제
     int delete(String email);
 
+    // 회원 탈퇴 사용자 정보 저장 메서드: email 주소를 인자로 받아 해당 이메일을 가진 사용자를 outUser 테이블에 저장
     int outUserSave(String email);
 }

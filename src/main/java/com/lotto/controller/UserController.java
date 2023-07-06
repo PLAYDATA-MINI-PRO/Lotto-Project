@@ -75,7 +75,6 @@ public class UserController {
 
         // 로그인이 성공하면
         if (login != null) {
-
             // 로그인한 사용자의 ID를 가져와 세션에 저장 -> 이후에 다른 페이지에서도 사용 가능
             session.setAttribute("id", login.getId());
 
@@ -85,8 +84,14 @@ public class UserController {
             // 로그인한 사용자의 이름을 가져와 세션에 저장 -> 이후에 다른 페이지에서도 사용 가능
             session.setAttribute("name", login.getName());
 
-            // 메인 페이지로 리다이렉트
-            modelAndView.setViewName("redirect:/");
+
+            // 로그인 사용자가 admin 이면 admin 페이지로 리다이렉트
+            if (login.getEmail().equals("admin@admin.com")) {
+                modelAndView.setViewName("redirect:/admin/main");
+            } else {
+                // 메인 페이지로 리다이렉트
+                modelAndView.setViewName("redirect:/");
+            }
 
             // 로그인 실패 시 다시 로그인 페이지로 리다이렉트
         } else {

@@ -4,7 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-<!--        com.lotto.domain.dto.User 클래스에 대한 별칭을 User로 지정-->
-        <typeAlias type="com.lotto.domain.dto.User" alias="User" />
+        <!--        com.lotto.domain.dto.User 클래스에 대한 별칭을 User로 지정-->
+        <typeAlias type="com.lotto.domain.dto.User" alias="User"/>
+        <typeAlias type="com.lotto.domain.dto.OutUser" alias="OutUser"/>
     </typeAliases>
 </configuration>

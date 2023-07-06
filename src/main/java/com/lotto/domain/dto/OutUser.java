@@ -2,27 +2,18 @@ package com.lotto.domain.dto;
 
 import java.sql.Timestamp;
 
-public class User {
+public class OutUser {
     private Integer id;
     private String email;
     private String name;
-    private String password;
-    private int money;
     private Timestamp createAt;
 
-    public User() {
-
-    }
-
-    public User(Integer id, String email, String name, String password, int money, Timestamp createAt) {
+    public OutUser(Integer id, String email, String name, Timestamp createAt) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.password = password;
-        this.money = money;
         this.createAt = createAt;
     }
-
 
     public Integer getId() {
         return id;
@@ -46,22 +37,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public Timestamp getCreateAt() {
