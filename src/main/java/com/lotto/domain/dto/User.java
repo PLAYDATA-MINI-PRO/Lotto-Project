@@ -7,14 +7,11 @@ public class User {
     private String email;
     private String name;
     private String password;
-    private int money;
+    private Integer money;
     private Timestamp createAt;
+    
 
-    public User() {
-
-    }
-
-    public User(Integer id, String email, String name, String password, int money, Timestamp createAt) {
+    public User(Integer id, String email, String name, String password, Integer money, Timestamp createAt) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -56,11 +53,11 @@ public class User {
         this.password = password;
     }
 
-    public int getMoney() {
+    public Integer getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 

@@ -8,8 +8,7 @@ public class LoginUser {
         this.email = email;
         this.password = password;
     }
-
-    public LoginUser() {}
+    
 
     public String getEmail() {
         return email;

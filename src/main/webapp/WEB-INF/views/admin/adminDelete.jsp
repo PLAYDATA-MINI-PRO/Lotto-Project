@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.lotto.domain.dto.User" %>
-<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -39,6 +37,10 @@
             background-color: #f5f5f5;
             cursor: pointer;
         }
+
+        .date {
+            white-space: nowrap;
+        }
     </style>
     <script>
         function deleteUser(userId) {
@@ -66,7 +68,8 @@
             <td>${user.name}</td>
             <td>${user.money}</td>
             <td>
-                <fmt:formatDate value="${user.createAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                <fmt:formatDate value="${user.createAt}" pattern="yyyy-MM-dd HH:mm:ss" var="formattedDate"/>
+                <span class="date">${formattedDate}</span>
             </td>
         </tr>
     </c:forEach>
