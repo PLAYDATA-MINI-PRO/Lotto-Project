@@ -23,4 +23,5 @@ public interface AdminMapper {
 
     // 큰 금액 순으로 회원 전체 충전 금액 정보 찾기 메서드: 전체 사용자를 검색하고 큰 금액을 가진 사용자 순으로 반환
     List<User> findAllByMoney();
+
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -29,7 +28,7 @@ public class AdminController {
     // 어드민 메인 페이지 반환 메서드
     @GetMapping("/main")
     public String getMainPage() {
-        return "/admin/main";
+        return "/admin/adminMain";
     }
 
     // 회원 정보 삭제 페이지 반환 메서드
@@ -40,7 +39,7 @@ public class AdminController {
         List<User> userList = adminService.findAll();
         model.addAttribute("userList", userList);
 
-        return "/admin/delete";
+        return "/admin/adminDelete";
     }
 
     // 회원 정보 삭제를 처리하는 메서드
@@ -85,4 +84,5 @@ public class AdminController {
 
         return "/admin/userMoneyList";
     }
+
 }

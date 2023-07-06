@@ -29,4 +29,5 @@
     <select id="findAllByMoney" resultType="User">
         select * from user order by money desc
     </select>
+    
 </mapper>

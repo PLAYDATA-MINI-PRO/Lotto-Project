@@ -41,4 +41,5 @@ public class AdminService {
     public List<User> findAllByMoney() {
         return adminMapper.findAllByMoney();
     }
+
 }
