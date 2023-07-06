@@ -18,11 +18,13 @@
             <td>${lotto.email}</td>
             <td>${lotto.lottoNumbers}</td>
             <td>${lotto.drawDate}</td>
+            <c:if test="${lotto.status eq false}">
             <td>
                 <form method="post" action="/lotto/showBuyPage">
                     <input type="hidden" name="lottoNumbers" value="${lotto.lottoNumbers}">
                     <input type="submit" >
                 </form>
             </td>
+            </c:if>
     </c:forEach>
 </table>

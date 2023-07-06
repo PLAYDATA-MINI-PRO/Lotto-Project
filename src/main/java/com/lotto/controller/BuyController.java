@@ -39,7 +39,7 @@ public class BuyController {
         buyService.updateMoneyAndStatus(money,status);
         List<LottoNumber> lottoNumber = buyService.findByEmail(userEmail);
         mav.addObject("lottoList",lottoNumber);
-        mav.setViewName("/lotto/showBuyPage");
+        mav.setViewName("redirect:/lotto/showBuyPage");
         return mav;
     }
 }
