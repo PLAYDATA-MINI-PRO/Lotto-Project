@@ -28,7 +28,7 @@ public class UserController {
     // 회원가입 페이지 반환 메서드
     @GetMapping("/signup")
     public String getSignupPage() {
-        return "/user/signup";
+        return "Usersignup";
     }
 
     // 회원가입을 처리하는 메서드
@@ -56,7 +56,7 @@ public class UserController {
     // 로그인 페이지를 반환하는 메서드
     @GetMapping("/login")
     public String getLoginPage() {
-        return "/user/login";
+        return "Userlogin";
     }
 
     // 로그인 처리를 하는 메서드
@@ -144,7 +144,7 @@ public class UserController {
             HttpSession session,
             ModelAndView mav
     ) {
-        mav.setViewName("/user/update");
+        mav.setViewName("Userupdate");
         return mav;
     }
 
