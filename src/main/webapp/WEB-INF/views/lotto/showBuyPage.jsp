@@ -59,6 +59,17 @@
             margin: 0 auto;
         }
     </style>
+
+    <script type="text/javascript">
+        function validateForm() {
+            var userMoney = parseInt(document.querySelector('.userMoney').value);
+
+            if (userMoney === 0) {
+                alert("잔액이 부족합니다.");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <h1>Lotto List</h1>
@@ -67,6 +78,8 @@
         <th>로또 번호</th>
         <th>회차</th>
         <th>구매하기</th>
+        <th>현재 잔액 : ${userMoney}</th>
+        <input type="hidden" class="userMoney" value="${userMoney}">
     </tr>
     <c:forEach items="${lottoList}" var="lotto">
         <c:if test="${lotto.status eq false}">
@@ -74,7 +87,7 @@
             <td>${lotto.lottoNumbers}</td>
             <td>${lotto.drawDate}</td>
             <td class="buy-button">
-                <form method="post" action="/lotto/showBuyPage">
+                <form method="post" action="/lotto/showBuyPage" onsubmit="validateForm();">
                     <input type="hidden" name="lottoNumbers" value="${lotto.lottoNumbers}">
                     <button type="submit">구매</button>
                 </form>

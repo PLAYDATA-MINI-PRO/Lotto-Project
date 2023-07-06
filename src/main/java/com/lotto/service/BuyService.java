@@ -25,13 +25,16 @@ public class BuyService {
         return buyMapper.findByEmail(email);
     }
 
-    public void updateMoneyAndStatus(UpdateUserMoneyAndStatus updateUserMoneyAndStatus) {
+    public boolean updateMoneyAndStatus(UpdateUserMoneyAndStatus updateUserMoneyAndStatus) {
         int money = buyMapper.findMoney(updateUserMoneyAndStatus.getBuyLottoRequest().getEmail());
         if (money <= 0) {
-            throw new IllegalStateException("잔액이 부족합니다");
+            return false;
         }
-        buyMapper.updateUserMoney(updateUserMoneyAndStatus.getBuyLottoRequest());
-        buyMapper.updateLottoStatus(updateUserMoneyAndStatus.getUpdateLottoStatusRequest());
+        else {
+            buyMapper.updateUserMoney(updateUserMoneyAndStatus.getBuyLottoRequest());
+            buyMapper.updateLottoStatus(updateUserMoneyAndStatus.getUpdateLottoStatusRequest());
+        }
+        return true;
     }
 
     public void chargeMoney(ChargeMoneyRequest chargeMoneyRequest) {

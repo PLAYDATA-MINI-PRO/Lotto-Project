@@ -27,6 +27,8 @@ public class BuyController {
     public ModelAndView lottoBuyPage(ModelAndView mav, HttpSession session) {
         String userEmail = (String) session.getAttribute("email");
         List<LottoNumber> lottoNumbers = buyService.findByEmail(userEmail);
+        int userMoney = buyService.findMoney(userEmail);
+        mav.addObject("userMoney",userMoney);
         mav.addObject("lottoList", lottoNumbers);
         mav.setViewName("/lotto/showBuyPage");
         return mav;
@@ -36,8 +38,9 @@ public class BuyController {
     public ModelAndView lottoBuy(ModelAndView mav, HttpSession session, @RequestParam String lottoNumbers) {
         String userEmail = (String) session.getAttribute("email");
         UpdateUserMoneyAndStatus updateUserMoneyAndStatus = new UpdateUserMoneyAndStatus(userEmail, lottoNumbers);
-        buyService.updateMoneyAndStatus(updateUserMoneyAndStatus);
+        boolean updateResult = buyService.updateMoneyAndStatus(updateUserMoneyAndStatus);
         List<LottoNumber> lottoNumber = buyService.findByEmail(userEmail);
+        mav.addObject("updateResult",updateResult);
         mav.addObject("lottoList", lottoNumber);
         mav.setViewName("redirect:/lotto/showBuyPage");
         return mav;
