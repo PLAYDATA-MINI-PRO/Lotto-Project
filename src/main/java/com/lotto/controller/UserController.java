@@ -145,6 +145,8 @@ public class UserController {
             ModelAndView mav
     ) {
         mav.setViewName("/user/update");
+        mav.addObject("name", session.getAttribute("name"));
+        mav.addObject("email", session.getAttribute("email"));
         return mav;
     }
 
@@ -178,5 +180,6 @@ public class UserController {
         mav.setViewName("redirect:/");
         return mav;
     }
+
 
 }
