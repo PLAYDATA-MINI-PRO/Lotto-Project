@@ -27,11 +27,11 @@ public class MainController {
 
     @GetMapping("/main")
     public ModelAndView showUpdatePage(
-//            HttpSession session,
+            HttpSession session,
             ModelAndView mav
     ) {
-//        String email = (String) session.getAttribute("email");
-        String email = "bbb";
+        String email = (String) session.getAttribute("email");
+//        String email = "bbb";
         List<Main> shoppingList = mainService.shoppingList(email); //  장바구니 리스트
         List<Main> buyList = mainService.buyList(email);  // 구매한 리스트
         List<Main> percentList = mainService.percentList();  // 구매한 리스트
@@ -72,11 +72,11 @@ public class MainController {
     @PostMapping("/main")
     public ModelAndView lottoShopping(
             @ModelAttribute ShoppingRequest request,
-//            HttpSession session,
+            HttpSession session,
             ModelAndView mav
     ){
-//        String email = (String) session.getAttribute("email");
-        String email = "bbb";
+        String email = (String) session.getAttribute("email");
+//        String email = "bbb";
 
         mainService.shopping(request.todto(email));
         // request랑 session을 둘 다 사용해야되서 request에서 email도 받아서 dto로 변환함
