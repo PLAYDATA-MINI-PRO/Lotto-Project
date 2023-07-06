@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Lotto Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f5f5f5;
@@ -9,7 +11,8 @@
             margin: 0;
             padding: 20px;
         }
-
+        css
+        Copy code
         .container {
             max-width: 400px;
             margin: 0 auto;
@@ -55,13 +58,16 @@
 </head>
 <body>
 <div class="container">
-    <h1>Lotto Page</h1>
+    <h1 class="text-center">Lotto Page</h1>
     <div class="user-money">현재 잔액: ${money}</div>
     <form method="post" action="/lotto/userChargeMoneyPage">
-        <input type="number" name="userMoney" placeholder="금액을 입력하세요">
-        <input type="submit" value="결제하기">
+        <div class="form-group">
+            <input type="number" name="userMoney" class="form-control" placeholder="금액을 입력하세요">
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-success" value="결제하기">
+        </div>
     </form>
-
 </div>
 </body>
 </html>
