@@ -2,6 +2,8 @@ package com.lotto.domain.request.user;
 
 import com.lotto.domain.dto.LoginUser;
 
+import javax.servlet.http.Cookie;
+
 // 로그인 요청을 처리하기 위한 클래스
 public class LoginRequest {
 
