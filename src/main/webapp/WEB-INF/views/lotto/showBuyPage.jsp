@@ -69,17 +69,17 @@
         <th>구매하기</th>
     </tr>
     <c:forEach items="${lottoList}" var="lotto">
-        <tr>
+        <c:if test="${lotto.status eq false}">
+            <tr>
             <td>${lotto.lottoNumbers}</td>
             <td>${lotto.drawDate}</td>
-            <c:if test="${lotto.status eq false}">
-                <td class="buy-button">
-                    <form method="post" action="/lotto/showBuyPage">
-                        <input type="hidden" name="lottoNumbers" value="${lotto.lottoNumbers}">
-                        <button type="submit">구매</button>
-                    </form>
-                </td>
-            </c:if>
+            <td class="buy-button">
+                <form method="post" action="/lotto/showBuyPage">
+                    <input type="hidden" name="lottoNumbers" value="${lotto.lottoNumbers}">
+                    <button type="submit">구매</button>
+                </form>
+            </td>
+        </c:if>
         </tr>
     </c:forEach>
 </table>
