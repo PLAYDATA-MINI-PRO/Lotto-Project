@@ -9,7 +9,7 @@
                   value="jdbc:mysql://localhost:3306/lotto?serverTimezone=Asia/Seoul&amp;characterEncoding=UTF-8"/>
 
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>
+        <property name="password" value="1q2w3e4r!!"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <constructor-arg ref="dataSource"/>

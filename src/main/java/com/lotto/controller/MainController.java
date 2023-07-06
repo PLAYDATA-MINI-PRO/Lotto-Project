@@ -27,14 +27,15 @@ public class MainController {
 
     @GetMapping("/main")
     public ModelAndView showUpdatePage(
-//            HttpSession session,
+            HttpSession session,
             ModelAndView mav
     ) {
-//        String email = (String) session.getAttribute("email");
-        String email = "bbb";
+        String email = (String) session.getAttribute("email");
+//        String email = "bbb";
         List<Main> shoppingList = mainService.shoppingList(email); //  장바구니 리스트
         List<Main> buyList = mainService.buyList(email);  // 구매한 리스트
         List<Main> percentList = mainService.percentList();  // 구매한 리스트
+
         int[] counts= new int[46]; // 인덱스 0~45까지의 배열을 만듬
         int totalNum = 0; // 총 번호의 개수
         String[] split = null; // split 배열 초기화
@@ -56,9 +57,6 @@ public class MainController {
             // 퍼센트 계산은 값/총 값 * 100 원래 식이지만 counts,totalNUM은 int라서 값이 소수로 나오면 0으로 반환해서 100을 먼저 곱해줌
         }
 
-//        System.out.println(Arrays.toString(counts));
-//        System.out.println(Arrays.toString(percentages));
-//        System.out.println(totalNum);
 
         String drawDate = mainService.drawDate(); // 최신회차 받아옴
         mav.addObject("percentages", percentages);
@@ -72,11 +70,11 @@ public class MainController {
     @PostMapping("/main")
     public ModelAndView lottoShopping(
             @ModelAttribute ShoppingRequest request,
-//            HttpSession session,
+            HttpSession session,
             ModelAndView mav
     ){
-//        String email = (String) session.getAttribute("email");
-        String email = "bbb";
+        String email = (String) session.getAttribute("email");
+//        String email = "bbb";
 
         mainService.shopping(request.todto(email));
         // request랑 session을 둘 다 사용해야되서 request에서 email도 받아서 dto로 변환함
