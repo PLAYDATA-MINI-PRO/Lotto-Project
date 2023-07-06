@@ -66,13 +66,13 @@ public class WinningNumberController {
         int count = numberArray.length;
         String rank = null;
         if(count == 6){
-            rank = "1등";
+            rank = "1등(식대권)";
         }else if(count == 5){
-            rank = "2등";
+            rank = "2등ㅋ()";
         }else if(count == 4){
-            rank = "3등";
+            rank = "3등ㅋㅋ";
         }else if(count == 3){
-            rank = "4등";
+            rank = "4등ㅋㅋㅋ";
         }else {
             rank = "낙첨되었습니다.";
             commonNumbers = "일치되는 번호가 없습니다.";
