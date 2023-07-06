@@ -62,6 +62,7 @@ public class BuyController {
         buyService.chargeMoney(chargeMoneyRequest);
         int userMoney = buyService.findMoney(userEmail);
         mav.addObject("userMoney", userMoney);
+        session.setAttribute("money" ,userMoney);
         mav.setViewName("redirect:/lotto/userChargeMoneyPage");
         return mav;
     }

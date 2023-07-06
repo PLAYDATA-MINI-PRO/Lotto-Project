@@ -198,6 +198,7 @@
     <ul class="menu">
         <li class="menu-item">이름: <%= session.getAttribute("name") %></li>
         <li class="menu-item">잔액: <%= session.getAttribute("money") %></li>
+        <li class="menu-item"><a href="/lotto/userChargeMoneyPage">충전하기</a></li>
         <li class="menu-item"><a href="/main">메인</a></li>
         <li class="menu-item"><a href="/user/logout">로그아웃</a></li>
     </ul>
