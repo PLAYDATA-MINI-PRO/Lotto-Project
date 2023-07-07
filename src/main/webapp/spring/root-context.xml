@@ -6,10 +6,10 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/lotto?serverTimezone=Asia/Seoul&amp;characterEncoding=UTF-8"/>
+                  value="jdbc:mysql://localhost:3306/Lotto?serverTimezone=Asia/Seoul&amp;characterEncoding=UTF-8"/>
 
         <property name="username" value="root"/>
-        <property name="password" value="1q2w3e4r!!"/>
+        <property name="password" value="hyun2002"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <constructor-arg ref="dataSource"/>

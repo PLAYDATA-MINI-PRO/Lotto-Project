@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sign up</title>
+    <title>Login</title>
     <!-- 부트스트랩 CSS -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
                                     <!-- Remember me 체크박스 -->
                                     <div class="form-check mb-4">
                                         <input class="form-check-input" type="checkbox" id="rememberMe"
-                                               name="rememberMe" value="true"/>
+                                               name="rememberMe" value="false"/>
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
 
@@ -69,5 +69,80 @@
         </div>
     </div>
 </section>
+
+<script>
+    // 쿠키 저장 및 로그인 시 이메일 값 설정
+    document.addEventListener("DOMContentLoaded", function () {
+        var rememberMeCheckbox = document.getElementById("rememberMe");
+        var emailInput = document.getElementById("form3Example3c");
+
+        // 쿠키에 이메일 저장
+        function setEmailCookie() {
+            if (rememberMeCheckbox.checked) {
+                document.cookie = "email=" + emailInput.value + "; expires=Thu, 1 Jan 2025 12:00:00 UTC; path=/";
+            } else {
+                document.cookie = "email=; expires=Thu, 1 Jan 1970 00:00:00 UTC; path=/;";
+            }
+        }
+
+        // 이메일 쿠키 값 가져와서 입력 필드에 설정
+        function setEmailFromCookie() {
+            var cookies = document.cookie.split(";");
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.indexOf("email=") === 0) {
+                    emailInput.value = cookie.substring("email=".length, cookie.length);
+                    rememberMeCheckbox.checked = true;
+                    break;
+                }
+            }
+        }
+
+        // Remember me 체크박스 이벤트 리스너
+        rememberMeCheckbox.addEventListener("change", setEmailCookie);
+
+        // 페이지 로드 시 이메일 쿠키 값 설정
+        setEmailFromCookie();
+    });
+
+    // 페이지 로드 시 체크박스 상태 확인 및 쿠키 삭제
+    window.onload = function () {
+        var rememberMeCheckbox = document.getElementById("rememberMe");
+        var emailInput = document.getElementById("form3Example3c");
+
+        // Remember me 체크박스 체크 여부 확인
+        function checkRememberMe() {
+            var cookies = document.cookie.split(";");
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.indexOf("email=") === 0) {
+                    rememberMeCheckbox.checked = true;
+                    break;
+                }
+            }
+        }
+
+        // Remember me 체크박스 체크되지 않았을 때 쿠키 삭제
+        function deleteEmailCookie() {
+            document.cookie = "email=; expires=Thu, 1 Jan 1970 00:00:00 UTC; path=/;";
+            emailInput.value = "";
+        }
+
+        // Remember me 체크박스 체크 여부 확인 및 쿠키 삭제
+        checkRememberMe();
+        if (!rememberMeCheckbox.checked) {
+            deleteEmailCookie();
+        }
+    };
+
+    // 로그아웃 시 체크박스 초기화
+    function logout() {
+        var rememberMeCheckbox = document.getElementById("rememberMe");
+        rememberMeCheckbox.checked = false;
+        deleteEmailCookie(); // Clear the email cookie as well
+    }
+</script>
+
+
 </body>
 </html>

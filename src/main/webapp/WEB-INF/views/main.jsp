@@ -21,11 +21,12 @@
                     //  selectedNumbers 에 받아오는 값을 push로 배열끝에 저장하고  lottoNumberInput.value에 + 가 아닌
                     //  selectedNumbers.join(',')으로 값을 추가가 아닌 새 value를 넣는 형식으로 value를 만듬
                 }
-            }else{
+            } else {
                 alert("6개까지 선택가능합니다.");
             }
         }
-        function lottoNumberClear(){ // 선택한 로또 번호 삭제
+
+        function lottoNumberClear() { // 선택한 로또 번호 삭제
             var lottoNumberInput = document.getElementById("lottoNumberInput");
             selectedNumbers = []; // 선택된 번호 배열을 초기화
             lottoNumberInput.value = ""; // 입력란의 값을 비움
@@ -53,6 +54,7 @@
 
             lottoNumberInput.value = selectedNumbers.join(',');
         }
+
         function validateForm() {
             var lottoNumberInput = document.getElementById("lottoNumberInput");
             var selectedNumbers = lottoNumberInput.value.split(","); // input value를 split 함수를 사용해서 배열로 저장
@@ -159,8 +161,6 @@
         }
 
 
-
-
         .menu {
             list-style: none;
             display: flex;
@@ -196,99 +196,107 @@
 <body>
 <header>
     <ul class="menu">
-        <li class="menu-item">이름: <%= session.getAttribute("name") %></li>
-        <li class="menu-item">잔액: <%= session.getAttribute("money") %></li>
+        <li class="menu-item">이름: <%= session.getAttribute("name") %>
+        </li>
+        <li class="menu-item">잔액: <%= session.getAttribute("money") %>
+        </li>
         <li class="menu-item"><a href="/lotto/userChargeMoneyPage">충전하기</a></li>
+        <li class="menu-item"><a href="/user/update">회원 정보 수정</a></li>
         <li class="menu-item"><a href="/main">메인</a></li>
         <li class="menu-item"><a href="/user/logout">로그아웃</a></li>
     </ul>
 </header>
 
-    <% double[] percentages = (double[]) request.getAttribute("percentages"); %>
+<% double[] percentages = (double[]) request.getAttribute("percentages"); %>
 
-    <table style="width: 600px; height: 300px; margin: 0 auto;">
-        <caption style="margin-bottom: 20px">로또 번호 선택</caption>
-        <br>
-        <!-- 로또 번호들을 클릭 이벤트로 연결 -->
-        <% for (int i = 0; i < 5; i++) { %>
-        <tr>
-            <% for (int j = 1; j <= 10; j++) {
-                int num = (i * 10) + j;
-                if (num > 45) {
-                    break;
-                }
-            %>
-            <td class="lotto-number" style="cursor: pointer" onclick="selectLottoNumber(<%= num %>)">
-                <%= num %>
-                <span class="percentage"><%= percentages[num] %>%</span>
-            </td>
-            <% } %>
-        </tr>
+<table style="width: 600px; height: 300px; margin: 0 auto;">
+    <caption style="margin-bottom: 20px">로또 번호 선택</caption>
+    <br>
+    <!-- 로또 번호들을 클릭 이벤트로 연결 -->
+    <% for (int i = 0; i < 5; i++) { %>
+    <tr>
+        <% for (int j = 1; j <= 10; j++) {
+            int num = (i * 10) + j;
+            if (num > 45) {
+                break;
+            }
+        %>
+        <td class="lotto-number" style="cursor: pointer" onclick="selectLottoNumber(<%= num %>)">
+            <%= num %>
+            <span class="percentage"><%= percentages[num] %>%</span>
+        </td>
         <% } %>
-    </table>
-    <p style="text-align: center; margin-top: 10px; font-size: 12px; color: #888888;">※ 마우스를 올렸을 때 나오는 %는 이용자들의 해당 번호 구매비율입니다.</p>
+    </tr>
+    <% } %>
+</table>
+<p style="text-align: center; margin-top: 10px; font-size: 12px; color: #888888;">※ 마우스를 올렸을 때 나오는 %는 이용자들의 해당 번호
+    구매비율입니다.</p>
 
 
-    <form class="cart-form" action="/main" method="post" onsubmit="return validateForm()" style="display: flex; justify-content: center; align-items: center;">
-        <input type="text" readonly name="drawDate" value="${drawDate}" style="width: 20px; border: 1px solid gray; border-radius: 6px; text-align: center;">회차
-        &nbsp;<input type="text" readonly id="lottoNumberInput" name="lottoNumber" placeholder="로또 번호가 입력되는 곳입니다.">
+<form class="cart-form" action="/main" method="post" onsubmit="return validateForm()"
+      style="display: flex; justify-content: center; align-items: center;">
+    <input type="text" readonly name="drawDate" value="${drawDate}"
+           style="width: 20px; border: 1px solid gray; border-radius: 6px; text-align: center;">회차
+    &nbsp;<input type="text" readonly id="lottoNumberInput" name="lottoNumber" placeholder="로또 번호가 입력되는 곳입니다.">
 
-        <input type="button" onclick="lottoNumberAuto()" value="자동" class="button">
-        <input type="button" onclick="lottoNumberClear()" value="삭제" class="button">
-        <input type="submit" value="장바구니" id="cartButton" class="button">
-    </form>
+    <input type="button" onclick="lottoNumberAuto()" value="자동" class="button">
+    <input type="button" onclick="lottoNumberClear()" value="삭제" class="button">
+    <input type="submit" value="장바구니" id="cartButton" class="button">
+</form>
 
-    <table style="margin-top: 20px;width: 900px;margin: 0 auto;">
-        <caption style="margin-bottom: 20px">장바구니</caption>
-        <br>
+<table style="margin-top: 20px;width: 900px;margin: 0 auto;">
+    <caption style="margin-bottom: 20px">장바구니</caption>
+    <br>
+    <tr>
+        <th>No.</th>
+        <th>회차</th>
+        <th>로또번호</th>
+    </tr>
+    <% int shoppingNum = 1; %>
+    <c:forEach items="${shoppingList}" var="shopping">
         <tr>
-            <th>No.</th>
-            <th>회차</th>
-            <th>로또번호</th>
-        </tr>
-        <% int shoppingNum = 1; %>
-        <c:forEach items="${shoppingList}" var="shopping">
-            <tr>
-                <td><%= shoppingNum %></td>
-                <td>${ shopping.drawDate }</td>
-                <td>${ shopping.lottoNumbers }</td>
-            </tr>
-            <% shoppingNum++; %>
-        </c:forEach>
-        <tr>
-            <td colspan="3">
-                <form method="get" action="/lotto/showBuyPage">
-                    <input type="submit" value="구매" class="button">
-                </form>
+            <td><%= shoppingNum %>
             </td>
+            <td>${ shopping.drawDate }</td>
+            <td>${ shopping.lottoNumbers }</td>
         </tr>
-    </table>
-
-    <table style="margin-top: 20px;width: 900px;margin: 0 auto;">
-        <caption style="margin-bottom: 20px">구매내역</caption>
-        <br>
-        <tr>
-            <td>No.</td>
-            <td>회차</td>
-            <td>로또번호</td>
-            <td>당첨조회</td>
-        </tr>
-        <% int buyNum = 1; %>
-        <c:forEach items="${buyList}" var="buy">
-            <form method="get" action="/lotto/result">
-                <tr>
-                    <td><%= buyNum %></td>
-                    <td>${ buy.drawDate }</td>
-                    <td>${ buy.lottoNumbers }</td>
-                    <td>
-                        <input type="hidden" name="drawDate" value="${buy.drawDate}">
-                        <input type="hidden" name="takeLottoNumber" value="${buy.lottoNumbers}">
-                        <input type="submit" value="조회" class="button">
-                    </td>
-                </tr>
+        <% shoppingNum++; %>
+    </c:forEach>
+    <tr>
+        <td colspan="3">
+            <form method="get" action="/lotto/showBuyPage">
+                <input type="submit" value="구매" class="button">
             </form>
-            <% buyNum++; %>
-        </c:forEach>
-    </table>
+        </td>
+    </tr>
+</table>
+
+<table style="margin-top: 20px;width: 900px;margin: 0 auto;">
+    <caption style="margin-bottom: 20px">구매내역</caption>
+    <br>
+    <tr>
+        <td>No.</td>
+        <td>회차</td>
+        <td>로또번호</td>
+        <td>당첨조회</td>
+    </tr>
+    <% int buyNum = 1; %>
+    <c:forEach items="${buyList}" var="buy">
+        <form method="get" action="/lotto/result">
+            <tr>
+                <td><%= buyNum %>
+                </td>
+                <td>${ buy.drawDate }</td>
+                <td>${ buy.lottoNumbers }</td>
+                <td>
+                    <input type="hidden" name="drawDate" value="${buy.drawDate}">
+                    <input type="hidden" name="takeLottoNumber" value="${buy.lottoNumbers}">
+                    <input type="submit" value="조회" class="button">
+                </td>
+            </tr>
+        </form>
+        <% buyNum++; %>
+    </c:forEach>
+</table>
 </body>
 </html>
