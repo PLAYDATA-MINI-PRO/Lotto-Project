@@ -40,7 +40,9 @@ public class BuyController {
         UpdateUserMoneyAndStatus updateUserMoneyAndStatus = new UpdateUserMoneyAndStatus(userEmail, lottoNumbers);
         boolean updateResult = buyService.updateMoneyAndStatus(updateUserMoneyAndStatus);
         List<LottoNumber> lottoNumber = buyService.findByEmail(userEmail);
+        int userMoney = buyService.findMoney(userEmail);
         mav.addObject("updateResult",updateResult);
+        session.setAttribute("money" ,userMoney);
         mav.addObject("lottoList", lottoNumber);
         mav.setViewName("redirect:/lotto/showBuyPage");
         return mav;
