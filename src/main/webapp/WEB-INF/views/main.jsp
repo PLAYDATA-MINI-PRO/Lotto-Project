@@ -192,6 +192,13 @@
             border-bottom-color: #f00;
         }
     </style>
+    <script>
+        function deleteUser(userId) {
+            if (confirm("정말로 회원 탈퇴 하시겠습니까?")) {
+                window.location.href = "/user/delete";
+            }
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -202,8 +209,10 @@
         </li>
         <li class="menu-item"><a href="/lotto/userChargeMoneyPage">충전하기</a></li>
         <li class="menu-item"><a href="/user/update">회원 정보 수정</a></li>
+        <li class="menu-item"><a onclick="deleteUser('<%=session.getAttribute("id")%>')">회원 탈퇴</a>
         <li class="menu-item"><a href="/main">메인</a></li>
         <li class="menu-item"><a href="/user/logout">로그아웃</a></li>
+        </li>
     </ul>
 </header>
 
